@@ -48,7 +48,17 @@ use Teensy 3 timer for scrolling
 #include "Arduino.h"
 #include <inttypes.h>
 #include "Print.h"
-#include <../gpio_expander/mcp23s17.h>
+
+//#define HPDL1414_GPIO_SPI
+#define HPDL1414_GPIO_I2C
+
+#if defined( HPDL1414_GPIO_I2C )
+#  include <../gpio_expander/mcp23017.h>
+#  define HPDL1414_GPIO mcp23017
+#elif defined( HPDL1414_GPIO_SPI )
+#  include <../gpio_expander/mcp23s17.h>
+#  define HPDL1414_GPIO mcp23s17
+#endif
 
 #define USESPITRANSACTIONS//uncomment will force to use the standard SPI library
 
@@ -123,7 +133,7 @@ class HPDL1414 : public Print {
  protected:
 	
  private:
-	mcp23s17     mygpio;//here the instance
+	HPDL1414_GPIO     mygpio;//here the instance
 	uint8_t 			_CS;
 	uint8_t 			_ADDRS;
 	uint8_t				_dispDrived;

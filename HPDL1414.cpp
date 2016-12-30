@@ -19,7 +19,11 @@ void HPDL1414::begin(const uint8_t howManyDisp){
 	if (howManyDisp < 1) _dispDrived = 1;//at list 1!
 	_maxDigits = _dispDrived*_digitPerUnit;//calculate once _maxDigits
 
+#if defined(HPDL1414_GPIO_I2C)
+	 mygpio.postSetup(_ADDRS);
+#else
 	 mygpio.postSetup(_CS,_ADDRS);
+#endif
 	 mygpio.begin();
 	 mygpio.gpioPinMode(OUTPUT);
 	 mygpio.gpioPort(0b1111110000100000);
