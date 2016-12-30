@@ -364,6 +364,10 @@ void HPDL1414::trigBlank(bool state){
 
 void HPDL1414::sendData(uint8_t disp){
 	uint16_t temp;
+	setDisplayUnit(disp,false);
+	temp =  _valueData | (_contrData << 8);//combine 2 bytes
+	mygpio.gpioPort(temp);
+	_sideDelay(3);
 	setDisplayUnit(disp,true);
 	temp =  _valueData | (_contrData << 8);//combine 2 bytes
 	mygpio.gpioPort(temp);
@@ -371,6 +375,7 @@ void HPDL1414::sendData(uint8_t disp){
 	setDisplayUnit(disp,false);
 	temp =  _valueData | (_contrData << 8);//combine 2 bytes
 	mygpio.gpioPort(temp);
+	_sideDelay(3);
 }
 
 #if defined(HPDL1414_DEBUG)
