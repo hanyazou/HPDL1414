@@ -48,7 +48,6 @@ use Teensy 3 timer for scrolling
 #include "Arduino.h"
 #include <inttypes.h>
 #include "Print.h"
-#include <../SPI/SPI.h>//this chip needs SPI
 #include <../gpio_expander/mcp23s17.h>
 
 #define USESPITRANSACTIONS//uncomment will force to use the standard SPI library

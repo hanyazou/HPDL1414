@@ -1,4 +1,3 @@
-#include <SPI.h>
 #include <mcp23s17.h>
 #include <HPDL1414.h>
 
